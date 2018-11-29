@@ -14,7 +14,6 @@
 
    #undef  YY_DECL
    #define YY_DECL int nAppa::Lexer::yylex()
-
 %}
 
 %%
