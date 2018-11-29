@@ -11,6 +11,9 @@ namespace nAppa {
    class Lexer: public yyFlexLexer {
     public:
       Lexer(std::istream& is): yyFlexLexer(&is) {}
+      Lexer(const Lexer&) =delete;
+      Lexer& operator=(const Lexer&) =delete;
+
 
       virtual int yylex() override;
    };

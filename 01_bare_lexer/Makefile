@@ -2,7 +2,7 @@
 # author: johannst
 
 CXX = clang++
-CXXFLAGS = -g -O0
+CXXFLAGS = -g -O0 -Wall -Wextra -Werror -std=c++11
 
 FLEX = flex++
 
@@ -11,11 +11,11 @@ ELF = lexer
 $(ELF): lexer.yy.o
 	$(CXX) -o $@ $^
 
-%.yy.cc: %.l
+%.yy.cc: %.l %.h
 	$(FLEX) -o $@ $<
 
 %.o: %.cc
-	$(CXX) -c -o $@ $<
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 clean:
 	rm -f $(ELF) *.o
