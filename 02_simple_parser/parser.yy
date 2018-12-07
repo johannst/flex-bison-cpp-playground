@@ -28,6 +28,8 @@
 %token   END    0
 %token   DEFINITION_BLOCK
 
+%start file
+
 %locations
 
 %%
@@ -44,20 +46,22 @@ void nAppa::Parser::error(const location_type &l, const std::string &err_message
 }
 
 #include <fstream>
+#include <sstream>
 #include <cassert>
+#include <memory>
 
 int main(int argc, const char* argv[]) {
+   std::unique_ptr<std::istream> is = 0;
    if (argc > 1) {
-      std::ifstream infile(argv[1]);
-      assert(infile.is_open() && infile.good());
-      nAppa::Lexer l(infile);
-      nAppa::Parser p(l);
-      return p.parse();
+      is = std::make_unique<std::fstream>(argv[1]);
    } else {
-      nAppa::Lexer l(std::cin);
-      nAppa::Parser p(l);
-      return p.parse();
+      is = std::make_unique<std::istringstream>("DEFINITION {  \n   }    ");
    }
+   assert(is->good());
+
+   nAppa::Lexer l(*is);
+   nAppa::Parser p(l);
+   return p.parse();
 }
 
 // vim:et:ft=yacc

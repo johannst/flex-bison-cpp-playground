@@ -2,7 +2,7 @@
 # author: johannst
 
 CXX = clang++
-CXXFLAGS = -g -O0 -Wall -Wextra -Werror -std=c++11 -MMD -MP
+CXXFLAGS = -g -O0 -Wall -Wextra -Werror -std=c++14 -MMD -MP
 
 FLEX = flex++
 BISON = bison
@@ -27,7 +27,8 @@ $(ELF): $(OBJS)
 
 clean:
 	rm -f $(ELF) $(OBJS) $(DEPS)
-	rm -f parser.tab.hh location.hh position.hh stack.hh
+	rm -f lexer.yy.cc
+	rm -f parser.tab.{hh,cc} location.hh position.hh stack.hh
 
 -include $(DEPS)
 
