@@ -8,6 +8,8 @@
 %defines
 %define api.namespace {nAppa}
 %define parser_class_name {Parser}
+%define api.value.type variant
+%define api.token.constructor
 
 %code requires{
    namespace nAppa {
@@ -21,13 +23,13 @@
    #include "lexer.h"
 
    #undef yylex
-   #define yylex lexer.yylex
+   #define yylex lexer.flex
 }
 
 %define parse.assert
 
 %token   END    0
-%token   DEFINITION_BLOCK
+%token   <std::string> DEFINITION_BLOCK
 
 %start file
 
@@ -37,7 +39,7 @@
 
 file
 : END
-| DEFINITION_BLOCK '{' '}' { std::cout << "Parser matched DEFINITION expression!" << std::endl; }
+| DEFINITION_BLOCK { std::cout << "Parser matched DEFINITION expression, got semantic_value = " << $1 << std::endl; }
 ;
 
 %%

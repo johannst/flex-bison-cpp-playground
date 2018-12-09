@@ -19,7 +19,8 @@ namespace nAppa {
       // resolve hidden overloaded function warning
       virtual int yylex() override { assert(false); }
 
-      virtual int yylex(Parser::semantic_type* lval, Parser::location_type* loc);
+      virtual Parser::symbol_type flex();
+      Parser::location_type loc;
    };
 }
 

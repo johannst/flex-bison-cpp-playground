@@ -12,36 +12,28 @@
    #include "lexer.h"
 
    #undef  YY_DECL
-   #define YY_DECL int nAppa::Lexer::yylex(Parser::semantic_type* lval, Parser::location_type* loc)
+   #define YY_DECL nAppa::Parser::symbol_type nAppa::Lexer::flex()
 
    using token = nAppa::Parser::token;
 
-   #define YY_USER_ACTION loc->step(); loc->columns(YYLeng());
+   #define YY_USER_ACTION loc.step(); loc.columns(YYLeng());
 
-   #define yyterminate() { return token::END; }
+   #define yyterminate() { return Parser::make_END(loc); }
 %}
 
 %%
-
-%{
-   lval = 0;
-%}
 
 [ \t]       ; // eat whitespace
 
 DEFINITION  {
               std::cout << "Lexer matched: DEFINITION" << std::endl;
-              return token::DEFINITION_BLOCK;
+              return Parser::make_DEFINITION_BLOCK("some_value_from_your_lexer", loc);
             }
 
-[{}]        {
-              std::cout << "Lexer matched: " << YYText()[0] << std::endl;
-               return YYText()[0];
-            }
 
 .           ; // eat unknown chars
 
-\n          loc->lines();
+\n          loc.lines();
 
 %%
 
