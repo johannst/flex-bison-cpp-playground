@@ -25,13 +25,14 @@
 }
 
 %define parse.assert
+%define parse.error verbose
+%locations
+%expect 0
 
 %token   END    0
 %token   DEFINITION_BLOCK
 
 %start file
-
-%locations
 
 %%
 
