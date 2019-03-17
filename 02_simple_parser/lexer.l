@@ -10,6 +10,7 @@
 
 %{
    #include "lexer.h"
+   #include <cstdlib>
 
    #undef  YY_DECL
    #define YY_DECL int nAppa::Lexer::yylex(Parser::semantic_type* lval, Parser::location_type* loc)
@@ -23,25 +24,27 @@
 
 %%
 
-%{
-   lval = 0;
-%}
-
 [ \t]       ; // eat whitespace
 
-DEFINITION  {
-              std::cout << "Lexer matched: DEFINITION" << std::endl;
-              return token::DEFINITION_BLOCK;
+[1-9][0-9]* {
+               lval->ival = std::strtol(YYText(), 0 /* endptr */, 10 /* base */);
+               std::cout << "Lexer matched: " << lval->ival << std::endl;
+               return token::NUMBER;
             }
 
-[{}]        {
-              std::cout << "Lexer matched: " << YYText()[0] << std::endl;
+[+-]        {
+               std::cout << "Lexer matched: " << YYText()[0] << std::endl;
                return YYText()[0];
             }
 
+[\n;]       {
+               if (YYText()[0] == '\n') {
+                  loc->lines();
+               }
+               return token::END_EXPR;
+            }
 .           ; // eat unknown chars
 
-\n          loc->lines();
 
 %%
 

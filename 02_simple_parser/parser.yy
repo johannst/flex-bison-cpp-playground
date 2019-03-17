@@ -9,37 +9,58 @@
 %define api.namespace {nAppa}
 %define parser_class_name {Parser}
 
-%code requires{
+%code requires {
    namespace nAppa {
       class Lexer;
    }
 }
 
-%parse-param { Lexer &lexer  }
+%parse-param { Lexer &lexer }
 
-%code{
+%code {
    #include "lexer.h"
 
    #undef yylex
    #define yylex lexer.yylex
 }
 
-%define parse.assert
+%define parse.assert true
 %define parse.error verbose
 %locations
 %expect 0
 
-%token   END    0
-%token   DEFINITION_BLOCK
+%union {
+   long int ival;
+}
 
-%start file
+%token   END    0
+%token   END_EXPR
+%token<ival>   NUMBER
+%type <ival>   expr expr_add expr_sub
+
+%start expr_ress
 
 %%
 
-file
-: END
-| DEFINITION_BLOCK '{' '}' { std::cout << "Parser matched DEFINITION expression!" << std::endl; }
-;
+expr_ress
+: expr_res
+| expr_ress expr_res
+
+expr_res
+: expr END_EXPR { std::cout << "Parser expr result = " << $1 << std::endl; }
+| END_EXPR
+
+expr
+: expr_add
+| expr_sub
+
+expr_add
+: expr '+' NUMBER { $$ = $1 + $3; }
+| NUMBER '+' NUMBER { $$ = $1 + $3; }
+
+expr_sub
+: expr '-' NUMBER { $$ = $1 - $3; }
+| NUMBER '-' NUMBER { $$ = $1 - $3; }
 
 %%
 
@@ -57,7 +78,7 @@ int main(int argc, const char* argv[]) {
    if (argc > 1) {
       is = std::make_unique<std::fstream>(argv[1]);
    } else {
-      is = std::make_unique<std::istringstream>("DEFINITION {  \n   }    ");
+      is = std::make_unique<std::istringstream>("4+6+4-10+5;12+30\n");
    }
    assert(is->good());
 
