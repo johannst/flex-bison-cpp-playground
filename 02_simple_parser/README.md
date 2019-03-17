@@ -80,14 +80,14 @@ By convention tokens are named all capitalized.
 
 Specify a return type for an intermediate grammar rule.
 
- **`%start grammer_rule`**o
+**`%start grammer_rule`**
 
 Define the parsers start symbols.
 
 
-TODO: Describe union and grammar rules
+## TODO: Describe union and grammar rules
 
 
 ## References
-Options: https://www.gnu.org/software/bison/manual/html_node/Bison-Options.html
-Defines: https://www.gnu.org/software/bison/manual/html_node/_0025define-Summary.html
+* Options: https://www.gnu.org/software/bison/manual/html_node/Bison-Options.html
+* Defines: https://www.gnu.org/software/bison/manual/html_node/_0025define-Summary.html
