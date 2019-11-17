@@ -9,7 +9,7 @@
 
 #include "parser.tab.hh"
 
-namespace nAppa {
+namespace nExpr {
    class Lexer: public yyFlexLexer {
     public:
       Lexer(std::istream& is): yyFlexLexer(&is) {}

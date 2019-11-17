@@ -6,16 +6,16 @@
 %option warn
 %option nodefault
 %option noyywrap
-%option yyclass="nAppa::Lexer"
+%option yyclass="nExpr::Lexer"
 
 %{
    #include "lexer.h"
    #include <cstdlib>
 
    #undef  YY_DECL
-   #define YY_DECL int nAppa::Lexer::yylex(Parser::semantic_type* lval, Parser::location_type* loc)
+   #define YY_DECL int nExpr::Lexer::yylex(Parser::semantic_type* lval, Parser::location_type* loc)
 
-   using token = nAppa::Parser::token;
+   using token = nExpr::Parser::token;
 
    #define YY_USER_ACTION loc->step(); loc->columns(YYLeng());
 

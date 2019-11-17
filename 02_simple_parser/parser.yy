@@ -6,11 +6,11 @@
 %language "c++"
 %debug
 %defines
-%define api.namespace {nAppa}
+%define api.namespace {nExpr}
 %define api.parser.class {Parser}
 
 %code requires {
-   namespace nAppa {
+   namespace nExpr {
       class Lexer;
    }
 }
@@ -64,7 +64,7 @@ expr_sub
 
 %%
 
-void nAppa::Parser::error(const location_type &l, const std::string &err_message) {
+void nExpr::Parser::error(const location_type &l, const std::string &err_message) {
    std::cerr << "Error: " << err_message << " at " << l << std::endl;;
 }
 
@@ -82,8 +82,8 @@ int main(int argc, const char* argv[]) {
    }
    assert(is->good());
 
-   nAppa::Lexer l(*is);
-   nAppa::Parser p(l);
+   nExpr::Lexer l(*is);
+   nExpr::Parser p(l);
    return p.parse();
 }
 
