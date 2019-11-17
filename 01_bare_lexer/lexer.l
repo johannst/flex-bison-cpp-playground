@@ -6,14 +6,14 @@
 %option warn
 %option nodefault
 %option noyywrap
-%option yyclass="nAppa::Lexer"
+%option yyclass="nLex::Lexer"
 
 %{
    #include "lexer.h"
    #include <iostream>
 
    #undef  YY_DECL
-   #define YY_DECL int nAppa::Lexer::yylex()
+   #define YY_DECL int nLex::Lexer::yylex()
 %}
 
 %%
@@ -30,10 +30,10 @@ int main(int argc, const char* argv[]) {
    if (argc > 1) {
       std::ifstream infile(argv[1]);
       assert(infile.is_open() && infile.good());
-      nAppa::Lexer l(infile);
+      nLex::Lexer l(infile);
       return l.yylex();
    } else {
-      nAppa::Lexer l(std::cin);
+      nLex::Lexer l(std::cin);
       return l.yylex();
    }
 }

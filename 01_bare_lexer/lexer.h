@@ -7,7 +7,7 @@
 #include <FlexLexer.h>
 #endif
 
-namespace nAppa {
+namespace nLex {
    class Lexer: public yyFlexLexer {
     public:
       Lexer(std::istream& is): yyFlexLexer(&is) {}
