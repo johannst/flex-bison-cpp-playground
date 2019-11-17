@@ -32,6 +32,14 @@ pizza : {
 }
 ```
 
+##  Build and run
+
+The parser optionally accepts a file or prints a hard-coded APPA string as example.
+```
+make
+./paser [<file>]
+```
+
 ---
 ###### *Easter egg
 The flying `bison` [appa](https://avatar.fandom.com/wiki/Appa).
