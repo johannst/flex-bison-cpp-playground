@@ -7,7 +7,7 @@
 %debug
 %defines
 %define api.namespace {nAppa}
-%define parser_class_name {Parser}
+%define api.parser.class {Parser}
 
 %code requires {
    namespace nAppa {
