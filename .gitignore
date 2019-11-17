@@ -7,5 +7,6 @@
 position.hh
 stack.hh
 location.hh
+lexer
 parser
 
