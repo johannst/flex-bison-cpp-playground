@@ -85,8 +85,9 @@ Specify a return type for an intermediate grammar rule.
 Define the parsers start symbols.
 
 
-## TODO: Describe union and grammar rules
-
+## TODO:
+- Describe union and grammar rules
+- extend parser with `*` and `/` operator and to show how to handle operator precedence
 
 ## References
 * Options: https://www.gnu.org/software/bison/manual/html_node/Bison-Options.html
