@@ -1,1 +1,11 @@
 *.o
+*.yy.cc
+*.yy.d
+*.tab.hh
+*.tab.cc
+*.tab.d
+position.hh
+stack.hh
+location.hh
+parser
+
