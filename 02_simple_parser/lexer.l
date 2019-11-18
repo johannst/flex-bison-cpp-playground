@@ -28,12 +28,16 @@
 
 [1-9][0-9]* {
                lval->ival = std::strtol(YYText(), 0 /* endptr */, 10 /* base */);
-               std::cout << "Lexer matched: " << lval->ival << std::endl;
+               if (mVerbose) {
+                  std::cout << "Lexer matched: " << lval->ival << std::endl;
+               }
                return token::NUMBER;
             }
 
-[+-]        {
-               std::cout << "Lexer matched: " << YYText()[0] << std::endl;
+[/*+-]      {
+               if (mVerbose) {
+                  std::cout << "Lexer matched: " << YYText()[0] << std::endl;
+               }
                return YYText()[0];
             }
 

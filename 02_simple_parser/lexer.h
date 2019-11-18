@@ -12,7 +12,7 @@
 namespace nExpr {
    class Lexer: public yyFlexLexer {
     public:
-      Lexer(std::istream& is): yyFlexLexer(&is) {}
+      Lexer(std::istream& is, bool verbose): yyFlexLexer(&is), mVerbose(verbose) {}
       Lexer(const Lexer&) =delete;
       Lexer& operator=(const Lexer&) =delete;
 
@@ -20,6 +20,9 @@ namespace nExpr {
       virtual int yylex() override { assert(false); }
 
       virtual int yylex(Parser::semantic_type* lval, Parser::location_type* loc);
+
+    private:
+      bool mVerbose;
    };
 }
 

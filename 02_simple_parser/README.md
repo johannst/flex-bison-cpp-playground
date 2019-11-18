@@ -2,22 +2,16 @@
 
 This is a simple starting point for using flex++ & bison++ and can be used as a skeleton.
 
-The parser is a simple calculator which can evaluate add/sub expressions.
-The lexer lexes numbers and +/- operators and the parser evaluates the expression.
+The parser is a simple calculator which can evaluate add/sub/mul/div expressions.
+The lexer lexes numbers and +,-,*,/ operators and the parser evaluates the expression.
 
-For demonstration purpose one expression is hard coded into the parser and can be run as:
+For demonstration purpose the parser reads expressions from stdin until
+`'q'` is entered to quit. The lexer and parser can be made verbose by supplying
+the `-v` flag.
 
 ```
 make
-
-./paser
-```
-
-Additionally the parser can read expressions from a file and evaluate them:
-```
-make
-
-./paser <file>
+./paser [-v]
 ```
 
 ## Short explanation: options
@@ -87,7 +81,6 @@ Define the parsers start symbols.
 
 ## TODO:
 - Describe union and grammar rules
-- extend parser with `*` and `/` operator and to show how to handle operator precedence
 
 ## References
 * Options: https://www.gnu.org/software/bison/manual/html_node/Bison-Options.html
