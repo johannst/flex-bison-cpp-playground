@@ -19,7 +19,11 @@ make
 **`%debug`**
 
 Enables the debug macro YYDEBUG inside the generated parser.
-Allows to enable tracing of the parser when setting `p.set_debug_level(1);`.
+This in turn includes the the method to set the debug level:
+```cpp
+// see parser.tab.hh
+void Parser::set_debug_level (debug_level_type l);
+```
 
 **`%language c++`**
 
